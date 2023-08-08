@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hello;
+option go_package = "./hello";
+
+
+message Message {
+    string content = 1;
+}
+
+service HelloService {
+    rpc Talkie(Message) returns (Message) {}
+}
