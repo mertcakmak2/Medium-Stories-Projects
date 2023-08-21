@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1.39
+    restart: always
+    ports:
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 16686:16686
+      - 14268:14268
