@@ -1,0 +1,63 @@
+version: '3'
+services:
+
+  spring-app:
+    container_name: spring-app
+    image: spring-app
+    restart: always
+    ports:
+      - "8080:8080"
+
+  redis1:
+    container_name: redis1
+    image: redis:7.0.5
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis2:
+    container_name: redis2
+    image: redis:7.0.5
+    ports:
+      - "6380:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis3:
+    container_name: redis3
+    image: redis:7.0.5
+    ports:
+      - "6381:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis4:
+    container_name: redis4
+    image: redis:7.0.5
+    ports:
+      - "6382:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis5:
+    container_name: redis5
+    image: redis:7.0.5
+    ports:
+      - "6383:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis6:
+    container_name: redis6
+    image: redis:7.0.5
+    ports:
+      - "6384:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
