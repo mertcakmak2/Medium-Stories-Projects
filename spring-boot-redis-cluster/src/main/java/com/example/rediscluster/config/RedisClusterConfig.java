@@ -52,7 +52,6 @@ public class RedisClusterConfig {
         template.setValueSerializer(new JdkSerializationRedisSerializer());
         template.setEnableTransactionSupport(true);
         template.afterPropertiesSet();
-        System.out.println("Redis Cluster template bean");
         return template;
     }
 
