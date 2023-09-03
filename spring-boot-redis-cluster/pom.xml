@@ -14,7 +14,7 @@
 	<name>rediscluster</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>11</java.version>
 		<redis.version>3.0.0</redis.version>
 		<jedis.version>3.9.0</jedis.version>
 	</properties>
