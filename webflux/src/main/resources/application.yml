@@ -1,0 +1,9 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/todo-db
+    username: root
+    password: root
+
+springdoc:
+  swagger-ui:
+    path: /api
