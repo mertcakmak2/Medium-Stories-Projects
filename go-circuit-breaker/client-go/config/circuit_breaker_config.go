@@ -7,7 +7,7 @@ import (
 
 func CircuitBreakerConfig() *gobreaker.CircuitBreaker {
 	settings := gobreaker.Settings{
-		Name:    "client-circuit-breaker",
+		Name:    "server-circuit-breaker",
 		Timeout: 5 * time.Second,
 		ReadyToTrip: func(counts gobreaker.Counts) bool {
 			return counts.TotalFailures >= 3
