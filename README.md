@@ -5,6 +5,8 @@ Medium blog stories projects. gRPC, Distributed Http Tracing, Redis Cluster.
 
 [gRPC Medium Story](https://medium.com/@mertcakmak2/redis-cluster-integration-in-spring-boot-af9e1fab574e)
 
+[go-circuit-breaker Medium Story](https://medium.com/@mertcakmak2/circuit-breaker-implementation-in-golang-efdfa40e49dc)
+
 [go-jaeger-distributed-tracing Medium Story](https://medium.com/dev-genius/distributed-tracing-with-jaeger-in-golang-b341b7600fc8)
 
 [spring-boot-redis-cluster Medium Story](https://medium.com/@mertcakmak2/what-is-grpc-example-with-golang-and-spring-boot-5b38d4c422ca)
