@@ -38,7 +38,7 @@ public class TodoControllerUnitTest {
     }
 
     @Test
-    void findTodoByIdTest() {
+    void findTodoById_test_should_return_todo_object_and_status_should_be_ok() {
         var todo = Todo.builder().id(1).title("test title 1").description("test description 1").build();
 
         when(todoService.findTodoById(todo.getId())).thenReturn(Mono.just(todo));
@@ -62,7 +62,7 @@ public class TodoControllerUnitTest {
     }
 
     @Test
-    void findTodoByIdFailureTest() {
+    void findTodoById_test_should_return_error_response_object_and_status_should_be_not_found() {
         var todo = Todo.builder().id(3).title("test title 3").description("test description 3").build();
 
         when(todoService.findTodoById(todo.getId())).thenReturn(Mono.error(new TodoNotFoundException(String.format("Todo not found. ID: %s", todo.getId()))));
@@ -84,7 +84,7 @@ public class TodoControllerUnitTest {
     }
 
     @Test
-    void findAllTodosTest() {
+    void findAllTodos_test_should_return_todo_list_and_status_should_be_ok() {
         var todos = List.of(
                 Todo.builder().id(1).title("test title 1").description("test description 1").build(),
                 Todo.builder().id(2).title("test title 2").description("test description 2").build(),
@@ -104,7 +104,7 @@ public class TodoControllerUnitTest {
     }
 
     @Test
-    void saveTodoTest() {
+    void saveTodo_test_should_return_saved_todo_and_status_should_be_created() {
         var todo = Todo.builder().id(1).title("test title 1").description("test description 1").build();
 
         when(todoService.saveTodo(isA(Todo.class))).thenReturn(Mono.just(todo));
@@ -128,7 +128,7 @@ public class TodoControllerUnitTest {
     }
 
     @Test
-    void deleteTodoById() {
+    void deleteTodoById_test_should_return_empty_and_status_should_be_no_content() {
         int todoId = 3;
 
         when(todoService.deleteTodoById(todoId)).thenReturn(Mono.empty());
