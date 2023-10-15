@@ -36,7 +36,7 @@ public class TodoController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find all Todos")
     Flux<Todo> findAllTodos() {
-        return todoService.findAllTodos();
+        return todoService.findAllTodos().log();
     }
 
     @PostMapping("")
