@@ -9,6 +9,8 @@ Medium blog stories projects. gRPC, Distributed Http Tracing, Redis Cluster.
 
 [go-jaeger-distributed-tracing Medium Story](https://medium.com/dev-genius/distributed-tracing-with-jaeger-in-golang-b341b7600fc8)
 
+[kafka-retry-failure](https://medium.com/@mertcakmak2/apache-kafka-retry-policy-in-spring-boot-edaa8048da60)
+
 [spring-boot-redis-cluster Medium Story](https://medium.com/@mertcakmak2/redis-cluster-integration-in-spring-boot-af9e1fab574e)
 
 [webflux Medium Story](https://medium.com/@mertcakmak2/reactive-programming-with-spring-webflux-postgresql-48b49ce4b3ea)
