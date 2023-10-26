@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-svc
+spec:
+  selector:
+    app: consumer-svc
+  ports:
+    - protocol: "TCP"
+      port: 8082
+      targetPort: 8082
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-svc
+spec:
+  selector:
+    matchLabels:
+      app: consumer-svc
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: consumer-svc
+    spec:
+      containers:
+        - name: consumer-svc
+          image: mertcakmak2/k8s-kafka-consumer
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+          env:
+            - name: kafka-service
+              value: "kafka-service"
