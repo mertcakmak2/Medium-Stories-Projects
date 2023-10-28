@@ -2,6 +2,7 @@ version: '3'
 services:
 
   otel-collector:
+    container_name: otel-collector
     image: otel/opentelemetry-collector-contrib:0.82.0
     restart: always
     command:
@@ -19,8 +20,8 @@ services:
     depends_on:
       - zipkin
 
-  # Zipkin
   zipkin:
+    container_name: zipkin
     image: openzipkin/zipkin:latest
     restart: always
     ports:
