@@ -10,13 +10,13 @@ public class Post {
     private int id;
     private String title;
     private String content;
-    private List<CommentResponseModel> comments = new ArrayList<>();
+    private List<CommentResponseModel> commentResponseModels = new ArrayList<>();
 
-    public Post(int id, String title, String content, List<CommentResponseModel> comments) {
+    public Post(int id, String title, String content, List<CommentResponseModel> commentResponseModels) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.comments = comments;
+        this.commentResponseModels = commentResponseModels;
     }
 
     public Post() {
@@ -47,10 +47,10 @@ public class Post {
     }
 
     public List<CommentResponseModel> getComments() {
-        return comments;
+        return commentResponseModels;
     }
 
-    public void setComments(List<CommentResponseModel> comments) {
-        this.comments = comments;
+    public void setComments(List<CommentResponseModel> commentResponseModels) {
+        this.commentResponseModels = commentResponseModels;
     }
 }
