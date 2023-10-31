@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-//@EnableFeignClients("com.example.postservice.feign")
-//@ImportAutoConfiguration({FeignAutoConfiguration.class})
 @EnableFeignClients
 public class PostServiceApplication {
 

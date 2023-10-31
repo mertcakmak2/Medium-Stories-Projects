@@ -1,4 +1,4 @@
-package com.example.postservice.config;
+package com.example.postservice.feign;
 
 import com.example.postservice.feign.ExceptionMessage;
 import feign.Response;
