@@ -68,6 +68,7 @@
 		<dependency>
 			<groupId>io.github.openfeign</groupId>
 			<artifactId>feign-micrometer</artifactId>
+			<version>12.3</version>
 		</dependency>
 
 		<dependency>
