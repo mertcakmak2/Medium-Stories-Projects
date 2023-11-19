@@ -19,7 +19,7 @@ public class BalanceService {
 
     @Transactional
     public void incrementBalance(){
-        Balance balance = balanceRepository.findBalanceByOwner("user-1")
+        Balance balance = balanceRepository.findBalanceByOwner("mert")
                 .orElseThrow(() -> new EntityNotFoundException("Balance not found"));
 
         log.info("balance incrementing..");
