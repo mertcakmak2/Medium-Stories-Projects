@@ -18,7 +18,7 @@ public class PostController {
     }
 
     @GetMapping(path = "")
-    public Iterable<Post> searchPostByContent(@RequestParam String text) {
-        return postRepository.searchByContent(text);
+    public Iterable<Post> searchPostByContent(@RequestParam String content) {
+        return postRepository.searchByContent(content);
     }
 }
