@@ -1,20 +1,13 @@
 package com.example.commentservice.service;
 
 import com.example.commentservice.model.Comment;
-import io.micrometer.tracing.Tracer;
 import io.micrometer.tracing.annotation.NewSpan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CommentService {
-
-    Logger log = LoggerFactory.getLogger(this.getClass());
-    private final Tracer tracer;
-
 
     private List<Comment> comments = List.of(
             new Comment(1, "nice post 1", 1),
@@ -28,14 +21,10 @@ public class CommentService {
             new Comment(9, "nice post 9", 4)
     );
 
-    public CommentService(Tracer tracer) {
-        this.tracer = tracer;
-    }
 
     @NewSpan(value = "comment-service-findCommentsByPostId-span")
     public List<Comment> findCommentsByPostId(int postId) throws InterruptedException {
         Thread.sleep(500);
-        log.info("findCommentsByPostId log signoza gönderildi.");
         return comments.stream().filter(comment -> comment.getPostId() == postId).toList();
     }
 }
