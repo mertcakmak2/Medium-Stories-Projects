@@ -1,0 +1,39 @@
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+
+  tracing:
+    sampling:
+      probability: 1.0
+
+spring:
+  application:
+    name: post-service
+
+server:
+  port: 8080
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
