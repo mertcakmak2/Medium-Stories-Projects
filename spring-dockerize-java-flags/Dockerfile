@@ -22,5 +22,6 @@ COPY --from=builder /target/*.jar /app/spring-app.jar
 EXPOSE 8080
 
 # Run the application
-#ENTRYPOINT ["java", "-jar", "-Xmx1G", "-Xms512M", "-XX:+PrintFlagsFinal", "/app/spring-boot-application.jar"]
-ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "-XX:MinRAMPercentage=60", "-XX:MaxRAMPercentage=60", "/app/spring-app.jar"]
+#ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "/app/spring-app.jar"]
+#java -XX:+PrintFlagsFinal -version | grep -E "MAX|UseSerialGC|UseG1GC|MaxHeapSize)"
+ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "-XX:NativeMemoryTracking=summary", "-XX:MinRAMPercentage=60", "-XX:MaxRAMPercentage=60", "/app/spring-app.jar"]
