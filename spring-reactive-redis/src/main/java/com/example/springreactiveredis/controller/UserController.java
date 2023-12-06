@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping(path = "")
-    public Mono<Long> saveUser(@RequestBody User user) {
+    public Mono<String> saveUser(@RequestBody User user) {
         return userRepository.saveUser(user);
     }
 
