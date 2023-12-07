@@ -14,6 +14,7 @@ import java.util.UUID;
 public class UserRepository {
 
     private final ReactiveRedisOperations<String, User> reactiveRedisOperations;
+    private String key = "users";
 
     @Autowired
     public UserRepository(ReactiveRedisOperations<String, User> reactiveRedisOperations) {
@@ -21,7 +22,7 @@ public class UserRepository {
     }
 
     public Flux<User> findAllUsers() {
-        return this.reactiveRedisOperations.opsForList().range("users", 0, -1);
+        return this.reactiveRedisOperations.opsForList().range(this.key, 0, -1);
     }
 
     public Mono<User> findUserById(String id) {
@@ -39,7 +40,6 @@ public class UserRepository {
 //                .flatMap(result -> reactiveRedisOperations.expire(user.getId(), ttl))
 //                .map(result -> "Key set with TTL").subscribe();
 
-        String key = "users";
         Duration ttl = Duration.ofSeconds(60); // Set TTL to 60 seconds
 
 //        No TTL
@@ -47,18 +47,18 @@ public class UserRepository {
 
         return reactiveRedisOperations.opsForList()
                 .rightPush(key, user)
-                .flatMap(result -> reactiveRedisOperations.expire(key, ttl))
+                .flatMap(result -> reactiveRedisOperations.expire(this.key, ttl))
                 .map(result -> "List set with TTL");
 
     }
 
     public Mono<Boolean> deleteAllUsers() {
-        return this.reactiveRedisOperations.opsForList().delete("users");
+        return this.reactiveRedisOperations.opsForList().delete(this.key);
     }
 
     public Mono<Long> publishUser(User user) {
         user.setId(UUID.randomUUID().toString());
-        return this.reactiveRedisOperations.convertAndSend("users", user);
+        return this.reactiveRedisOperations.convertAndSend(this.key, user);
     }
 
 }
