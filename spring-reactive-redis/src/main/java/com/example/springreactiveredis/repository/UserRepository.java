@@ -42,6 +42,9 @@ public class UserRepository {
         String key = "users";
         Duration ttl = Duration.ofSeconds(60); // Set TTL to 60 seconds
 
+//        No TTL
+//        reactiveRedisOperations.opsForList().rightPush("users", user);
+
         return reactiveRedisOperations.opsForList()
                 .rightPush(key, user)
                 .flatMap(result -> reactiveRedisOperations.expire(key, ttl))
