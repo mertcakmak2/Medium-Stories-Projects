@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
+import org.springframework.data.redis.connection.ReactiveSubscription;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -46,17 +47,16 @@ public class ReactiveRedisConfig {
         ReactiveRedisMessageListenerContainer container = new ReactiveRedisMessageListenerContainer(reactiveRedisConnectionFactory);
         ObjectMapper objectMapper = new ObjectMapper();
         container.receive(ChannelTopic.of("users"))
-                .map(p->p.getMessage())
+                .map(ReactiveSubscription.Message::getMessage)
                 .map(m -> {
                     try {
-                        User user= objectMapper.readValue(m, User.class);
-                        return user;
+                        return objectMapper.readValue(m, User.class);
                     } catch (IOException e) {
                         return null;
                     }
                 })
                 .switchIfEmpty(Mono.error(new IllegalArgumentException()))
-                .flatMap(p-> userRepository.saveUser(p))
+                .flatMap(userRepository::saveUser)
                 .subscribe(c-> log.info("User saved."));
         return container;
     }
