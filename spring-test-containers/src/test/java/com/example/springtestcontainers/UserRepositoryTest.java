@@ -49,7 +49,7 @@ class UserRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        repository.deleteAll();
+        // repository.deleteAll();
     }
 
     @Test

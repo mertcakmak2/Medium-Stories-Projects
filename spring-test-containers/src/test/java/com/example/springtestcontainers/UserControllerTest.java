@@ -54,10 +54,10 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        repository.deleteAll();
-
-        var savedUser = repository.save(User.builder().name("mert").build());
-        this.id = savedUser.getId();
+//        repository.deleteAll();
+//
+//        var savedUser = repository.save(User.builder().name("mert").build());
+//        this.id = savedUser.getId();
     }
 
     @Test
@@ -78,8 +78,10 @@ public class UserControllerTest {
     @Test
     @Order(2)
     public void should_find_user_by_id_and_return_ok_status_code() {
+        var user = User.builder().name("mert").build();
+        repository.save(user);
 
-        var url = String.format("/api/v1/users/%s", this.id);
+        var url = String.format("/api/v1/users/%s", user.getId());
 
         ResponseEntity<User> findUserByIdResponse = restTemplate.getForEntity(url, User.class);
         User existUser = findUserByIdResponse.getBody();
