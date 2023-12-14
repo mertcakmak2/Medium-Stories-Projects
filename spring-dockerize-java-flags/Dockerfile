@@ -24,4 +24,4 @@ EXPOSE 8080
 # Run the application
 #ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "/app/spring-app.jar"]
 #java -XX:+PrintFlagsFinal -version | grep -E "MAX|UseSerialGC|UseG1GC|MaxHeapSize)"
-ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "-XX:NativeMemoryTracking=summary", "-XX:MinRAMPercentage=60", "-XX:MaxRAMPercentage=60", "/app/spring-app.jar"]
+ENTRYPOINT ["java", "-jar", "-XX:+PrintFlagsFinal", "-XX:+UseG1GC", "-XX:MinRAMPercentage=60", "-XX:MaxRAMPercentage=60", "/app/spring-app.jar"]
