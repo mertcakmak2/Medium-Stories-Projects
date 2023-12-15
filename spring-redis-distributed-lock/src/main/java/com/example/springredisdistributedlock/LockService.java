@@ -25,6 +25,9 @@ public class LockService {
             Thread.sleep(200);
 
             log.info("Operation completed.");
+
+            // if you want, you can release lock.
+            // lock.releaseLock(lockKey);
         } else {
             log.error("Failed to acquire lock. Resource is busy.");
         }
