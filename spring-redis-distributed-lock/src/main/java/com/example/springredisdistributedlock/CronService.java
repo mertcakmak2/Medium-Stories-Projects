@@ -12,27 +12,26 @@ import java.util.concurrent.TimeUnit;
 public class CronService {
 
     private final RedisDistributedLock lock;
+    private final String LOCK_KEY = "lock-key";
 
     @Autowired
     public CronService(RedisDistributedLock lock) {
         this.lock = lock;
     }
 
-    @Scheduled(fixedDelay = 8000L)
-    private void cronMethod(){
+    @Scheduled(fixedDelay = 15000L)
+    private void cronMethod() throws InterruptedException {
         log.info("Cron job running..");
-        try {
-            if (lock.acquireLock("lock-key", 15000, TimeUnit.MILLISECONDS)) {
-                log.info("Lock acquired. Operation started.");
 
-                Thread.sleep(2000);
+        if (lock.acquireLock(this.LOCK_KEY, 15000, TimeUnit.MILLISECONDS)) {
+            log.info("Lock acquired. Operation started.");
 
-                log.info("Operation completed.");
-            } else {
-                log.error("Failed to acquire lock. Resource is busy.");
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(200);
+
+            log.info("Operation completed.\n*******");
+        } else {
+            log.error("Failed to acquire lock. Resource is busy.\n*******");
         }
+
     }
 }

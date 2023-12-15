@@ -12,7 +12,7 @@ public class LockController {
     private LockService lockService;
 
     @GetMapping("/perform/{lockKey}")
-    public String performOperation(@PathVariable String lockKey) {
+    public String performOperation(@PathVariable String lockKey) throws InterruptedException {
         lockService.performWithLock(lockKey);
         return "Operation completed";
     }

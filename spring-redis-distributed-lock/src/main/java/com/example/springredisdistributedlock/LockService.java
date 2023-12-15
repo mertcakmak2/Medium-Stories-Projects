@@ -17,20 +17,16 @@ public class LockService {
         this.lock = lock;
     }
 
-    public void performWithLock(String lockKey) {
+    public void performWithLock(String lockKey) throws InterruptedException {
 
-        try {
-            if (lock.acquireLock(lockKey, 15000, TimeUnit.MILLISECONDS)) {
-                log.info("Lock acquired. Operation started.");
+        if (lock.acquireLock(lockKey, 15000, TimeUnit.MILLISECONDS)) {
+            log.info("Lock acquired. Operation started.");
 
-                Thread.sleep(2000);
+            Thread.sleep(200);
 
-                log.info("Operation completed.");
-            } else {
-                log.error("Failed to acquire lock. Resource is busy.");
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.info("Operation completed.");
+        } else {
+            log.error("Failed to acquire lock. Resource is busy.");
         }
 
     }
