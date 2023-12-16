@@ -8,27 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/health")
+@RequestMapping("/api/v1")
 public class Controller {
 
-    private List<String> stringList = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
 
-    @GetMapping
-    public String health() throws InterruptedException {
+    @GetMapping(path = "/fill")
+    public String fillTheList() throws InterruptedException {
         Thread.sleep(200);
-        var healthString = "health";
-        stringList.add(healthString);
-        return healthString;
+        var filled = "filled";
+        list.add(filled);
+        return filled;
     }
 
     @GetMapping(path = "/memory-status")
     public MemoryStats getMemoryStatistics() {
-        MemoryStats stats = new MemoryStats(
+        return new MemoryStats(
                 Runtime.getRuntime().totalMemory(),
                 Runtime.getRuntime().maxMemory(),
                 Runtime.getRuntime().freeMemory()
         );
-        return stats;
     }
 }
 
