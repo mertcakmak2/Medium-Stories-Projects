@@ -1,6 +1,7 @@
 package com.example.springawss3;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,13 +23,19 @@ public class S3Service {
         this.s3client = s3client;
     }
 
-    public void uploadFile(String keyName, MultipartFile file) throws IOException {
-        var putObjectResult = s3client.putObject(bucketName, keyName, file.getInputStream(), null);
+    public void uploadFile(String objectName, MultipartFile file) throws IOException {
+        var putObjectResult = s3client.putObject(bucketName, objectName, file.getInputStream(), null);
         log.info(putObjectResult.getMetadata());
     }
 
-    public S3Object getFile(String keyName) {
-        return s3client.getObject(bucketName, keyName);
+    public S3Object getFile(String objectName) {
+        return s3client.getObject(bucketName, objectName);
     }
+
+    public void deleteObject(String objectName) {
+        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, objectName);
+        s3client.deleteObject(deleteObjectRequest);
+    }
+
 
 }

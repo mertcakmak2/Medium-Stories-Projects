@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1")
 public class S3Controller {
 
     private final S3Service s3Service;
@@ -46,5 +46,11 @@ public class S3Controller {
                 .contentType(MediaType.IMAGE_PNG) // This content type can change by your file :)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\""+fileName+"\"")
                 .body(new InputStreamResource(content));
+    }
+
+    @DeleteMapping("/delete/{fileName}")
+    public String deleteFile(@PathVariable String fileName) {
+        s3Service.deleteObject(fileName);
+        return "File deleted";
     }
 }
