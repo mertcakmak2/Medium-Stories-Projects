@@ -20,17 +20,15 @@ public class Consumer {
         this.amazonSQSClient = amazonSQSClient;
     }
 
-    @Scheduled(fixedDelay = 3000) //executes on every 5 second gap.
+    @Scheduled(fixedDelay = 5000) // It runs every 5 seconds.
     public void consumeMessages() {
         try {
             String queueUrl = amazonSQSClient.getQueueUrl(queueName).getQueueUrl();
-            log.info("[CONSUMER] Queue: {}", queueUrl);
 
             ReceiveMessageResult receiveMessageResult = amazonSQSClient.receiveMessage(queueUrl);
 
             if (!receiveMessageResult.getMessages().isEmpty()) {
                 com.amazonaws.services.sqs.model.Message message = receiveMessageResult.getMessages().get(0);
-                log.info("[CONSUMER] SQS Message ID: {}", message.getMessageId());
                 log.info("Read Message from queue: {}", message.getBody());
                 amazonSQSClient.deleteMessage(queueUrl, message.getReceiptHandle());
             }

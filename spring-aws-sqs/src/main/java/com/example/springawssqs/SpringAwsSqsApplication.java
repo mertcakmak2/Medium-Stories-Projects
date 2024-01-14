@@ -17,7 +17,10 @@ public class SpringAwsSqsApplication {
     @Bean
     public ApplicationRunner runner(Publisher publisher) {
         return args -> {
-            publisher.publishMessage();
+            Thread.sleep(3000);
+            for (int i = 0; i < 10; i++) {
+                publisher.publishMessage(String.valueOf(i));
+            }
         };
     }
 

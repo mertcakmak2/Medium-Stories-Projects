@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Service
 @Log4j2
@@ -25,16 +24,14 @@ public class Publisher {
         this.objectMapper = objectMapper;
     }
 
-    public void publishMessage() {
+    public void publishMessage(String id) {
         try {
             GetQueueUrlResult queueUrl = amazonSQSClient.getQueueUrl(queueName);
-            log.info("[PUBLISHER] Queue: {}", queueUrl.getQueueUrl());
             var message = Message.builder()
-                    .id(UUID.randomUUID().toString())
+                    .id(id)
                     .content("message")
                     .createdAt(new Date()).build();
             var result = amazonSQSClient.sendMessage(queueUrl.getQueueUrl(), objectMapper.writeValueAsString(message));
-            log.info("[PUBLISHER] SQS Message ID: {}", result.getMessageId());
         } catch (Exception e) {
             log.error("Queue Exception Message: {}", e.getMessage());
         }
