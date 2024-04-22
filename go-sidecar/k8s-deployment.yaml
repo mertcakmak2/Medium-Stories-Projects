@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-container-sidecar
+spec:
+  selector:
+    app: go-container-sidecar
+  ports:
+    - protocol: "TCP"
+      name: main-container-port
+      port: 8080
+      targetPort: 8080
+    - protocol: "TCP"
+      name: sidecar-container-port
+      port: 8081
+      targetPort: 8081
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-container-sidecar
+spec:
+  selector:
+    matchLabels:
+      app: go-container-sidecar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: go-container-sidecar
+    spec:
+      containers:
+        - name: go-container
+          image: mertcakmak2/go-container:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+        - name: go-sidecar
+          image: mertcakmak2/go-sidecar:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
